@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --luxury-dark: #00301A;
+    --luxury-green: #004B23;
+    --luxury-gold: #FFC300;
+    --luxury-cream: #FDFCDC;
+    --luxury-gray: #4A5568;
+    --luxury-white: #FFFFFF;
+}
+
+body {
+    background-color: var(--luxury-cream);
+    color: var(--luxury-dark);
+    font-family: 'Outfit', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+.luxury-gradient {
+    background: linear-gradient(135deg, #004B23 0%, #00301A 100%);
+}
+
+.luxury-card {
+    background: var(--luxury-white);
+    border: 1px solid rgba(0, 75, 35, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.luxury-card:hover {
+    border-color: var(--luxury-gold);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 75, 35, 0.1);
+}
+
+.luxury-btn {
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.luxury-btn-gold {
+    background-color: var(--luxury-green);
+    color: var(--luxury-white);
+}
+
+.luxury-btn-gold:hover {
+    background-color: #006b32;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 75, 35, 0.2);
+}
+
+.luxury-btn-outline {
+    border: 2px solid var(--luxury-green);
+    color: var(--luxury-green);
+}
+
+.luxury-btn-outline:hover {
+    background: var(--luxury-green);
+    color: var(--luxury-white);
+}
+
+
