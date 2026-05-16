@@ -13,14 +13,25 @@ class SampleDataSeeder extends Seeder
     public function run(): void
     {
         $grades = ['KB', 'TK A', 'TK B'];
-        $genders = ['Laki-laki', 'Perempuan'];
         
-        $first_student = null;
+        $maleNames = ['Ahmad Syarif', 'Budi Santoso', 'Candra Wijaya', 'Dedi Kurniawan', 'Eko Prasetyo', 'Fajar Ramadhan', 'Guntur Wibowo', 'Hendra Kusuma', 'Iwan Setiawan', 'Joko Susilo'];
+        $femaleNames = ['Siti Aminah', 'Ani Lestari', 'Citra Dewi', 'Dian Permata', 'Eka Putri', 'Fitri Handayani', 'Gita Sari', 'Hana Pertiwi', 'Indah Puspita', 'Julianti'];
+
+        $maleIndex = 0;
+        $femaleIndex = 0;
 
         foreach ($grades as $grade) {
             for ($i = 1; $i <= 5; $i++) {
-                $gender = $genders[array_rand($genders)];
-                $name = "Siswa " . $grade . " " . $i;
+                // Alternate between male and female
+                if (($maleIndex + $femaleIndex) % 2 == 0) {
+                    $name = $maleNames[$maleIndex % count($maleNames)];
+                    $gender = 'Laki-laki';
+                    $maleIndex++;
+                } else {
+                    $name = $femaleNames[$femaleIndex % count($femaleNames)];
+                    $gender = 'Perempuan';
+                    $femaleIndex++;
+                }
                 
                 $student = \App\Models\Student::create([
                     'name' => $name,
@@ -30,20 +41,6 @@ class SampleDataSeeder extends Seeder
                     'address' => 'Jl. Ceria No. ' . rand(1, 200),
                     'parent_name' => 'Wali ' . $name,
                     'phone' => '0812' . rand(10000000, 99999999),
-                ]);
-
-                if (!$first_student) {
-                    $first_student = $student;
-                }
-
-                // Create User for Parent
-                \App\Models\User::create([
-                    'name' => 'Orang Tua ' . $name,
-                    'username' => 'parent' . strtolower(str_replace(' ', '', $grade)) . $i,
-                    'role' => 'parent',
-                    'student_id' => $student->id,
-                    'email' => 'parent' . strtolower(str_replace(' ', '', $grade)) . $i . '@example.com',
-                    'password' => \Illuminate\Support\Facades\Hash::make('password'),
                 ]);
 
                 // Create some activities
@@ -56,12 +53,28 @@ class SampleDataSeeder extends Seeder
             }
         }
 
-        // Create one teacher account
+        // Create teacher accounts
         \App\Models\User::create([
-            'name' => 'Ibu Guru An-Nahl',
+            'name' => 'Ust. Rahmat',
             'username' => 'guru',
             'role' => 'admin',
             'email' => 'guru@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('password'),
+        ]);
+
+        \App\Models\User::create([
+            'name' => 'Kepala Sekolah An-Nahl',
+            'username' => 'kepsek',
+            'role' => 'admin',
+            'email' => 'kepsek@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('password'),
+        ]);
+
+        \App\Models\User::create([
+            'name' => 'Bunda Revi',
+            'username' => 'revi',
+            'role' => 'admin',
+            'email' => 'revi@example.com',
             'password' => \Illuminate\Support\Facades\Hash::make('password'),
         ]);
     }

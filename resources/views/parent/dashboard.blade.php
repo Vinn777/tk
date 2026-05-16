@@ -53,7 +53,12 @@
                                             <h4 class="font-bold text-gray-800 text-lg">{{ $activity->activity_name }}</h4>
                                             <span class="text-xs font-bold bg-green-50 text-[#004B23] px-3 py-1 rounded-full">{{ $activity->activity_date }}</span>
                                         </div>
-                                        <p class="text-gray-600 leading-relaxed italic">"{{ $activity->description }}"</p>
+                                        <p class="text-gray-600 leading-relaxed italic mb-4">"{{ $activity->description }}"</p>
+                                        @if($activity->image)
+                                            <div class="mt-4">
+                                                <img src="{{ asset('storage/' . $activity->image) }}" alt="Foto Kegiatan" class="rounded-2xl max-w-full h-auto shadow-sm border border-gray-100">
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             @empty

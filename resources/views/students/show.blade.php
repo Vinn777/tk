@@ -31,27 +31,37 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg md:col-span-2">
                     <div class="p-8 text-gray-900">
                         <h3 class="text-xl font-bold mb-6 text-gray-700">Jurnal Kegiatan Harian</h3>
+
+                        @if(session('success'))
+                            <div class="bg-green-50 border-l-4 border-[#004B23] text-[#004B23] px-6 py-4 rounded-2xl relative mb-8 shadow-sm" role="alert">
+                                <span class="block sm:inline font-bold"><i class="fas fa-check-circle mr-2"></i> {{ session('success') }}</span>
+                            </div>
+                        @endif
                         
                         <!-- Form Tambah Kegiatan -->
-                        <form action="{{ route('activities.store') }}" method="POST" class="mb-10 bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-inner">
+                        <form action="{{ route('activities.store') }}" method="POST" enctype="multipart/form-data" class="mb-10 bg-gray-50 p-6 rounded-2xl border border-gray-100 shadow-inner">
                             @csrf
                             <input type="hidden" name="student_id" value="{{ $student->id }}">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                                 <div>
                                     <label class="block text-sm font-bold text-gray-600 mb-2">Nama Kegiatan</label>
-                                    <input type="text" name="activity_name" class="w-full border-gray-200 rounded-xl shadow-sm focus:border-coral-400 focus:ring-coral-400" placeholder="Contoh: Mewarnai, Membaca..." required>
+                                    <input type="text" name="activity_name" class="w-full border-gray-200 rounded-xl shadow-sm focus:border-[#004B23] focus:ring-[#004B23]" placeholder="Contoh: Mewarnai, Membaca..." required>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-bold text-gray-600 mb-2">Tanggal Kegiatan</label>
-                                    <input type="date" name="activity_date" class="w-full border-gray-200 rounded-xl shadow-sm focus:border-coral-400 focus:ring-coral-400" value="{{ date('Y-m-d') }}" required>
+                                    <input type="date" name="activity_date" class="w-full border-gray-200 rounded-xl shadow-sm focus:border-[#004B23] focus:ring-[#004B23]" value="{{ date('Y-m-d') }}" required>
                                 </div>
                                 <div class="md:col-span-2">
                                     <label class="block text-sm font-bold text-gray-600 mb-2">Keterangan / Catatan Guru</label>
-                                    <textarea name="description" rows="3" class="w-full border-gray-200 rounded-xl shadow-sm focus:border-coral-400 focus:ring-coral-400" placeholder="Berikan catatan mengenai perkembangan siswa hari ini..."></textarea>
+                                    <textarea name="description" rows="3" class="w-full border-gray-200 rounded-xl shadow-sm focus:border-[#004B23] focus:ring-[#004B23]" placeholder="Berikan catatan mengenai perkembangan siswa hari ini..."></textarea>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-bold text-gray-600 mb-2">Foto Dokumentasi (Opsional)</label>
+                                    <input type="file" name="image" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#E6F2EB] file:text-[#004B23] hover:file:bg-[#D4E9DD]">
                                 </div>
                             </div>
-                            <button type="submit" class="mt-6 btn-primary w-full md:w-auto px-10">
-                                Simpan Jurnal
+                            <button type="submit" class="btn-primary flex items-center justify-center gap-2 w-full md:w-auto" style="background: #004B23 !important; color: white !important; padding: 14px 32px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(0, 75, 35, 0.2); border: none; cursor: pointer;">
+                                <i class="fas fa-paper-plane"></i> Simpan Jurnal Kegiatan
                             </button>
                         </form>
 
@@ -65,8 +75,13 @@
                                             <h4 class="font-bold text-gray-800 text-lg">{{ $activity->activity_name }}</h4>
                                             <p class="text-sm font-semibold text-[#004B23]">{{ $activity->activity_date }}</p>
                                             <p class="mt-3 text-gray-600 leading-relaxed">{{ $activity->description }}</p>
+                                            @if($activity->image)
+                                                <div class="mt-4">
+                                                    <img src="{{ asset('storage/' . $activity->image) }}" alt="Foto Kegiatan" class="rounded-xl max-w-full h-auto shadow-sm border border-gray-100">
+                                                </div>
+                                            @endif
                                         </div>
-                                        <form action="{{ route('activities.destroy', $activity->id) }}" method="POST">
+                                        <form action="{{ route('activities.destroy', $activity->id) }}" method="POST" onsubmit="return confirm('Hapus catatan kegiatan ini?')">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="text-red-300 hover:text-red-500 transition" title="Hapus Catatan">

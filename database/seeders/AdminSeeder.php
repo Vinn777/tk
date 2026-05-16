@@ -12,11 +12,6 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::create([
-            'name' => 'Admin Guru',
-            'username' => 'admin',
-            'email' => 'admin@tk.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('password'),
-        ]);
+        // Admin user removed as per request
     }
 }

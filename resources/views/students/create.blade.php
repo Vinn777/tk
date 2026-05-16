@@ -48,9 +48,11 @@
                                 <textarea name="address" id="address" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
                             </div>
                         </div>
-                        <div class="flex items-center justify-end mt-8 pt-6 border-t border-gray-100">
-                            <a href="{{ route('students.index') }}" class="text-gray-500 hover:text-gray-700 font-bold mr-6 transition">Batal</a>
-                            <button type="submit" class="bg-[#004B23] hover:bg-[#00301A] text-white font-extrabold py-3 px-10 rounded-full focus:outline-none focus:shadow-outline transition shadow-lg flex items-center gap-2">
+                        <div class="flex items-center justify-between mt-10 pt-8 border-t-2 border-gray-50">
+                            <a href="{{ route('students.index') }}" class="btn-secondary" style="background: #FFC300 !important; color: #00301A !important; padding: 14px 32px; border-radius: 50px; font-weight: 800; text-decoration: none; box-shadow: 0 10px 20px rgba(255, 195, 0, 0.2); transition: all 0.3s;">
+                                <i class="fas fa-times-circle mr-2"></i> Batal
+                            </a>
+                            <button type="submit" class="btn-primary flex items-center gap-2" style="background: #004B23 !important; color: white !important; padding: 14px 40px; border-radius: 50px; font-weight: 800; box-shadow: 0 10px 20px rgba(0, 75, 35, 0.2); border: none; cursor: pointer; transition: all 0.3s;">
                                 <i class="fas fa-save"></i> Simpan Data Siswa
                             </button>
                         </div>

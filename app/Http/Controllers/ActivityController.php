@@ -16,9 +16,17 @@ class ActivityController extends Controller
             'activity_name' => 'required',
             'activity_date' => 'required|date',
             'description' => 'nullable',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        \App\Models\Activity::create($request->all());
+        $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('activities', 'public');
+            $data['image'] = $imagePath;
+        }
+
+        \App\Models\Activity::create($data);
 
         return back()->with('success', 'Kegiatan berhasil ditambahkan.');
     }

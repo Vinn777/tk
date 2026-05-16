@@ -51,9 +51,6 @@
                                             <a href="{{ route('students.edit', $student->id) }}" class="p-2 bg-yellow-50 text-yellow-600 rounded-lg hover:bg-yellow-100 transition" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('register.parent', ['student_id' => $student->id]) }}" class="p-2 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition" title="Buat Akun Orang Tua">
-                                                <i class="fas fa-user-plus"></i>
-                                            </a>
                                             <form action="{{ route('students.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Hapus data ini?')">
                                                 @csrf
                                                 @method('DELETE')
